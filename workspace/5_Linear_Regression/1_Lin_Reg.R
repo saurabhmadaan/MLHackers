@@ -84,6 +84,23 @@ ggplot(hw, aes(x=Height,y=Weight))+
 lin.reg<-lm(Weight~Height,data=hw)
 lin.reg
 
+# --------- sites data ---- 
+top1ksites<-read.csv('data/top_1000_sites.tsv',sep='\t',stringsAsFactors=FALSE)
+
+head(top1ksites)
+ggplot(top1ksites,aes(x=PageViews,y=UniqueVisitors)) + geom_point() #no clear pattern discernible due to scale
+
+
+ggplot(top1ksites,aes(y=log(PageViews),x=log(UniqueVisitors))) + 
+  geom_point() +
+  geom_smooth(method='lm', se=FALSE)   
+
+
+lm.fit<-lm(log(PageViews)~log(UniqueVisitors),data=top1ksites)
+
+summary(lm.fit)
+
+
 
 
 
